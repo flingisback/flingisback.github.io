@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="css/style.css" rel="stylesheet">
+    <!-- link font chinese-rocks inside fonts folder-->
+
+    <style>
+        .arrows {
+
+            width: 60px;
+            height: 72px;
+            position: absolute;
+            left: 50%;
+            margin-left: -30px;
+            bottom: 20px;
+        }
+
+        .arrows path {
+            stroke: #2994D1;
+            fill: transparent;
+            stroke-width: 4px;
+            animation: arrow 2s infinite;
+            -webkit-animation: arrow 2s infinite;
+        }
+
+        @keyframes arrow {
+            0% {
+                opacity: 0
+            }
+
+            40% {
+                opacity: 1
+            }
+
+            80% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
+        @-webkit-keyframes arrow
+
+        /*Safari and Chrome*/
+            {
+            0% {
+                opacity: 0
+            }
+
+            40% {
+                opacity: 1
+            }
+
+            80% {
+                opacity: 0
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
+        .arrows path.a1 {
+            animation-delay: -1s;
+            -webkit-animation-delay: -1s;
+            /* Safari 和 Chrome */
+        }
+
+        .arrows path.a2 {
+            animation-delay: -0.5s;
+            -webkit-animation-delay: -0.5s;
+            /* Safari 和 Chrome */
+        }
+
+        .arrows path.a3 {
+            animation-delay: 0s;
+            -webkit-animation-delay: 0s;
+            /* Safari 和 Chrome */
+        }
+
+        @font-face {
+            font-family: 'chinese-rocks-rg';
+            src: url(./fonts/chinese_rocks/chinese-rocks-rg.otf);
+        }
+
+        @font-face {
+            font-family: 'moderne';
+            src: url(./fonts/Moderne\ Sans\ Font.ttf);
+        }
+
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        .body::-webkit-scrollbar {
+            display: none;
+            background-color: #393D47;
+        }
+
+        /* Hide scrollbar for IE, Edge, and Firefox */
+        .body {
+
+            font-family: 'chinese-rocks-rg';
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .background-img {
+
+            /* make background image  30 px smaller than the acual image in height */
+
+            width: 100%;
+            height: 72%;
+            display: inline-block;
+            overflow: hidden;
+            position: absolute;
+
+            top: 0;
+            left: 0;
+            z-index: 1;
+            padding: 0;
+            margin: 0;
+            border-radius: 0px 0px 10px 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.7s ease-in-out;
+            background-color: #000 !important;
+
+        }
+
+        /* an invisible div that sits over background image with a high z-index to recieve hover events */
+        .overlay {
+            width: 100%;
+            height: 72%;
+            display: inline-block;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+            border-radius: 0px 0px 10px 10px;
+            background-color: #000 !important;
+            opacity: 0;
+
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .background-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            overflow: hidden;
+            position: absolute;
+            transition: all 0.7s ease-in-out;
+            /* add rounded bottom corners to the image
+           /* border-radius: 0px 0px 30px 30px; */
+            padding: 0;
+            margin-left: -8px;
+            margin-right: -8px;
+            filter: blur(3px);
+
+        }
+
+        .background-img:hover img {
+            transform: scale(1.07, 1.07);
+
+            /* make it blurry */
+            filter: blur(6px);
+
+            opacity: 0.8;
+            user-drag: none;
+            -webkit-user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+
+
+
+
+        }
+
+        .floating-div button {
+            background-color: #7FBA00;
+            border: 5px solid #7FBA00;
+            /* Set border to a solid color */
+            border-radius: 10px;
+            font-family: 'chinese-rocks-rg';
+            font-size: 1.5vw;
+            position: relative;
+            opacity: 1;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .floating-div button:hover {
+            transform: scale(1.01, 1.01);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+
+        .background {
+            width: 100%;
+            height: 140vh; /* why is it above 100? how do you have more than 100% of the screen be less than 100%? i hate css */
+
+            padding: 0;
+
+            position: relative;
+            margin-top: -30px;
+            background-color: #393D47;
+            /* Makes the floating div center */
+
+        }
+
+        .name {
+            width: 60%;
+            height: 8%;
+            position: absolute;
+            top: 25%;
+            left: 20%;
+            z-index: 1;
+            background-color: transparent;
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .floating-div {
+            width: 75%;
+            overflow: hidden;
+            height: 22%;
+
+            background-color: transparent;
+
+            border-radius: 15px;
+            border-width: 5px;
+
+
+
+            /* Adjust the radius as needed */
+            margin: auto;
+            position: absolute;
+            top: 35%;
+            /* Adjust the position as needed */
+            left: 0;
+            right: 0;
+            z-index: 101;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.0);
+            /*transition to slide in from the top */
+            transition: all 0.5s ease-in-out;
+
+
+            /* Adjust shadow properties as needed */
+        }
+
+        .infotext-container {
+            background-color: transparent;
+            top: 55%;
+            left: 5%;
+
+            position: absolute;
+            width: 90%;
+            height: 50%;
+            /* make flexbox */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+    
+            
+        }
+
+        .infotext-paragraph {
+            background-color: transparent;
+            width: 30%;
+   
+            text-align: justify;
+            justify-content: space-around;
+           
+            /* set the character spacing */
+      
+            /* Add this line for better justification */
+            color: white;
+            font-family: 'moderne';
+            font-size: 1.5vw;
+            padding:5% 3%;
+        }
+
+ 
+
+        #logo-container {
+            overflow: hidden;
+            transform: translateY(-100px);
+            transition: transform 0.7s ease-in-out;
+            /* Keep only the transform property for the transition effect */
+            position: absolute;
+            top: 1%;
+            left: 1%;
+            width: 99%;
+            height: 10%;
+            object-fit: scale-down;
+            z-index: 14;
+        }
+    </style>
+
+</head>
+
+<body>
+    <svg class="arrows" style="position:fixed; top: 80%; left:95%; z-index: 1000;stroke-width: 30px;">
+        <path class="a1" d="M0 0 L30 32 L60 0" stroke="green" stroke-width="300"></path>
+        <path class="a2" d="M0 20 L30 52 L60 20" stroke="green" stroke-width="300"></path>
+        <path class="a3" d="M0 40 L30 72 L60 40" stroke="green" stroke-width="300"></path>
+    </svg>
+
+    <div id="logo-container">
+        <img src="./codezero.png" id="logo" style="width: 10%; height:75%;">
+        <p
+            style="color: #7FBA00; font-size: 1.5vw; font-family: 'chinese-rocks-rg', sans-serif; font-weight: 500; position: absolute; top: 15%; right: 5%; margin: 0;">
+            Discord</p>
+        <p
+            style="color: #7FBA00; font-size: 1.5vw; font-family: 'chinese-rocks-rg', sans-serif; font-weight: 500; position: absolute; top: 15%; right: 13%; margin: 0;">
+            IC3 Tip</p>
+        <p
+            style="color: #7FBA00; font-size: 1.5vw; font-family: 'chinese-rocks-rg', sans-serif; font-weight: 500; position: absolute; top: 15%; right: 21%; margin: 0;">
+            Docs</p>
+    </div>
+
+    <div class="background">
+        <!-- Content goes here -->
+        <div class="background-img">\
+            <img src="./background.png">
+        </div>
+        <div class="overlay"></div>
+        <div class="name">
+            <img src="./name.png" style="width: 100%; height:100%;">
+        </div>
+        <div class="floating-div">
+            <button style="left: 15%; top:30%; width: 30%; height:40%; " onclick="window.location.href='/pages/hacked'">
+                Help! I've been hacked!!</button>
+            <button style="left:25%; top:30%; width: 30%; height:40%; " onclick="window.location.href='/pages/file-analysis'">
+                this file looks suspicious...</button>
+        </div>
+        <div class="infotext-container">
+            <div class="infotext-paragraph">
+                <h1 style="text-align: center; font-family: 'chinese-rocks-rg';">DEFENSE</h2>
+                    <br>
+
+                <p> The first step to fighting cyber crime is to be properly defended. it is important to
+                    follow proper cyber hygiene such as account security measures and proper device setup and antivirus. Make
+                    sure to never download or run anything that isn't very reputible or open source</p>
+            </div>
+            <div class="infotext-paragraph">
+                <h1 style="text-align: center; font-family: 'chinese-rocks-rg';">Recovery</h2>
+                <br>
+                <p>Recovery starts immediatly after a cyber attack. The volunteer members of Counter Resistance will do everything we can, from nullifying blackmail threats and aecuring accounts to reverse engineering and removing viruses and attempting to decrypt files after a ransomware attack. </p>
+            </div>
+            <div class="infotext-paragraph">
+                <h1 style="text-align: center; font-family: 'chinese-rocks-rg';">Counter Attack</h2>
+                <br>
+                <p>This project is fully in the private sector with no government endorsement. Because of this, we do not directly attack the hackers. Instead we use OSINT and reverse engineering to to gather as much info as possible on them and feed this to the proper athorities to do their part.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 310" style="background-color: #393D47;">
+        <path fill=" #98FB98" fill-opacity="1.0"
+            d="M0,128L24,128C48,128,96,128,144,112C192,96,240,64,288,85.3C336,107,384,181,432,208C480,235,528,213,576,186.7C624,160,672,128,720,122.7C768,117,816,139,864,128C912,117,960,75,1008,64C1056,53,1104,75,1152,90.7C1200,107,1248,117,1296,117.3C1344,117,1392,107,1416,101.3L1440,96L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z">
+        </path>
+    </svg>
+
+    <div style="width: 100%; height: 60vh; margin-top: -10px; background-color:   #98FB98;"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 310" style="background-color:#98FB98 ;"
+        style="transform:rotateX(180);">
+        <path fill=" #393D47" fill-opacity="1.0"
+            d="M0,128L24,128C48,128,96,128,144,112C192,96,240,64,288,85.3C336,107,384,181,432,208C480,235,528,213,576,186.7C624,160,672,128,720,122.7C768,117,816,139,864,128C912,117,960,75,1008,64C1056,53,1104,75,1152,90.7C1200,107,1248,117,1296,117.3C1344,117,1392,107,1416,101.3L1440,96L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z">
+        </path>
+    </svg>
+    <div style="width: 100%; height: 60vh; margin-top: -10px; background-color:   #393D47;"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" style="background-color: #393D47;">
+        <path fill="#262626" fill-opacity="1.1"
+            d="M0,192L120,170.7C240,149,480,107,720,101.3C960,96,1200,128,1320,144L1440,160L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z">
+        </path>
+    </svg>
+
+</body>
+<script>
+    // svg arrows onclick scroll to
+    document.getElementsByTagName("svg")[0].onclick = function () {
+        checkpoints = [411, 911, 1411, 1644]; // todo: make this dynamic with hrefs
+        position = checkpoints.filter(function (value) {
+            return value > document.documentElement.scrollTop + 1;
+        })[0];
+        if (position == undefined) {
+            position = 0;
+        }
+        window.scrollTo({
+            top: position,
+            behavior: 'auto'
+        });
+
+    }
+
+    document.getElementsByClassName("floating-div")[0].onmouseover = function () {
+        let targetelement = document.getElementsByClassName("background-img")[0];
+        targetelement.children[0].style.transform = "scale(1.07, 1.07)";
+        targetelement.children[0].style.filter = "blur(6px)";
+        targetelement.children[0].style.opacity = "0.5";
+
+        let logo = document.getElementById("logo-container");
+        logo.style.transition = "transform 0.5s ease-in-out";
+        logo.style.transform = "translateY(0)";
+
+
+    }
+
+    document.getElementsByClassName("floating-div")[0].onmouseout = function () {
+        let targetelement = document.getElementsByClassName("background-img")[0];
+        targetelement.children[0].style.transform = "scale(1, 1)";
+        targetelement.children[0].style.filter = "blur(3px)";
+        targetelement.children[0].style.opacity = "1";
+
+        let logo = document.getElementById("logo-container");
+        logo.style.transition = "transform 0.5s ease-in-out";
+        logo.style.transform = "translateY(-100px)";
+
+
+    }
+
+    document.getElementsByClassName("overlay")[0].onmouseover = function () {
+        let targetelement = document.getElementsByClassName("background-img")[0];
+        targetelement.children[0].style.transform = "scale(1.07, 1.07)";
+        targetelement.children[0].style.filter = "blur(6px)";
+        targetelement.children[0].style.opacity = "0.9";
+
+        let logo = document.getElementById("logo-container");
+        logo.style.transition = "transform 0.5s ease-in-out";
+        logo.style.transform = "translateY(0)";
+    }
+
+    document.getElementsByClassName("overlay")[0].onmouseout = function () {
+        let targetelement = document.getElementsByClassName("background-img")[0];
+        targetelement.children[0].style.transform = "scale(1, 1)";
+        targetelement.children[0].style.filter = "blur(3px)";
+        targetelement.children[0].style.opacity = "1";
+
+        let logo = document.getElementById("logo-container");
+        logo.style.transition = "transform 0.5s ease-in-out";
+        logo.style.transform = "translateY(-100px)";
+    }
+
+    document.addEventListener("scroll", function () {
+        console.log(document.documentElement.scrollTop);
+        if (document.documentElement.scrollTop > 150) {
+            document.getElementsByClassName("floating-div")[0].style.transform = "translateY(-200%)";
+            targetElement = document.getElementsByClassName("background-img")[0]
+            targetElement.style.height = "55%";
+            document.getElementsByClassName("overlay")[0].style.height = "55%";
+
+            document.getElementsByClassName("name")[0].style.transform = "translateY(-300%)";
+            //scale the image to 1.5x
+
+            targetElement.children[0].style.opacity = "0.5";
+        } else {
+            document.getElementsByClassName("floating-div")[0].style.transform = "translateY(0%)";
+            document.getElementsByClassName("background-img")[0].style.height = "72%";
+            document.getElementsByClassName("overlay")[0].style.height = "72%";
+            document.getElementsByClassName("background-img")[0].children[0].style.opacity = "1";
+            document.getElementsByClassName("name")[0].style.transform = "translateY(0%)";
+        }
+        // if 100px from top make the background img half the size
+
+    });
+
+
+</script>
+
+</html>
